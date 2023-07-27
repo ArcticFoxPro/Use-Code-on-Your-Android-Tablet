@@ -2,7 +2,7 @@
 
 # Use VS Code on Your Android Tablet（[`code-server`](https://coder.com/docs/code-server/)）
 
-<center>![](/ReadmeImageEN.png)</center>
+![](/ReadmeImageEN.png)
 
 ## 简体中文
 

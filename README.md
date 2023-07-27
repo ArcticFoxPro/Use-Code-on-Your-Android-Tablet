@@ -1,6 +1,6 @@
 # 在 Android 平板上使用 VS Code（[`code-server`](https://coder.com/docs/code-server/)）
 
-<center>![](/ReadmeImageZhCN.png)</center>
+![](/ReadmeImageZhCN.png)
 
 ## English
 
