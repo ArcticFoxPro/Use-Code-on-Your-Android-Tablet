@@ -98,7 +98,7 @@ export PASSWORD="<PASSWORD>"
 
 打开从本仓库下载的 8080 软件，输入你设置的密码，即可进入 `code-server`。
 
-### 日后使用
+### 后续使用
 
 打开 Termux，依次运行以下命令：
 
@@ -124,6 +124,6 @@ export PASSWORD="<PASSWORD>"
 
 然后打开 8080 软件即可。
 
-### 更多
+### 附加说明
 
 由于 Termux 的文件保存在私有目录（data/data）中，非 root 设备无法进入，因此可以通过在 Ubuntu 环境下安装各种使用 SSH、Web 等方式的服务器管理工具进行文件管理。
