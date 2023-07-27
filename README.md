@@ -74,7 +74,7 @@ wget https://github.com/cdr/code-server/releases/download/<VERSION>/code-server-
 tar -xvf ./code-server-<VERSION>-linux-arm64.tar.gz
 ```
 
-移动的解压后目录：
+移动到解压后目录：
 
 > 请注意替换尖括号及其内容为相应版本号，例如：`cd code-server-4.15.0-linux-arm64/bin`。
 
