@@ -63,13 +63,11 @@ apt update && apt upgrade
 ```
 
 > Please note to replace the angle brackets and their contents with the corresponding version number, for example: `wget https://github.com/coder/code-server/releases/download/v4.15.0/code-server-4.15.0-linux-arm64.tar.gz`.
-
 ```bash
 wget https://github.com/coder/code-server/releases/download/<VERSION>/code-server-<VERSION>-linux-arm64.tar.gz
 ```
 
 > Please note to replace the angle brackets and their contents with the corresponding version number, for example: `tar -xvf ./code-server-4.15.0-linux-arm64.tar.gz`.
-
 ```bash
 tar -xvf ./code-server-<VERSION>-linux-arm64.tar.gz
 ```
@@ -77,7 +75,6 @@ tar -xvf ./code-server-<VERSION>-linux-arm64.tar.gz
 Move to the extracted directory:
 
 > Please note to replace the angle brackets and their contents with the corresponding version number, for example: `cd code-server-4.15.0-linux-arm64/bin`.
-
 ```bash
 cd code-server-<VERSION>-linux-arm64/bin
 ```
@@ -85,7 +82,6 @@ cd code-server-<VERSION>-linux-arm64/bin
 Enter the following command to set a temporary password for accessing `code-server`:
 
 > Please note to replace the angle brackets and their contents with your desired password.
-
 ```bash
 export PASSWORD="<PASSWORD>"
 ```
@@ -107,13 +103,11 @@ Open `Termux` and execute the following commands:
 ```
 
 > Please note to replace the angle brackets and their contents with the corresponding version number.
-
 ```bash
 cd code-server-<VERSION>-linux-arm64/bin
 ```
 
 > Please note to replace the angle brackets and their contents with your set password.
-
 ```bash
 export PASSWORD="<PASSWORD>"
 ```

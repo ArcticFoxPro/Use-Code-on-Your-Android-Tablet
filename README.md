@@ -63,13 +63,11 @@ apt update && apt upgrade
 ```
 
 > 请注意替换尖括号及其内容为相应版本号，例如：`wget https://github.com/coder/code-server/releases/download/v4.15.0/code-server-4.15.0-linux-arm64.tar.gz`。
-
 ```bash
 wget https://github.com/coder/code-server/releases/download/<VERSION>/code-server-<VERSION>-linux-arm64.tar.gz
 ```
 
 > 请注意替换尖括号及其内容为相应版本号，例如：`tar -xvf ./code-server-4.15.0-linux-arm64.tar.gz`。
-
 ```bash
 tar -xvf ./code-server-<VERSION>-linux-arm64.tar.gz
 ```
@@ -77,7 +75,6 @@ tar -xvf ./code-server-<VERSION>-linux-arm64.tar.gz
 移动到解压后目录：
 
 > 请注意替换尖括号及其内容为相应版本号，例如：`cd code-server-4.15.0-linux-arm64/bin`。
-
 ```bash
 cd code-server-<VERSION>-linux-arm64/bin
 ```
@@ -85,7 +82,6 @@ cd code-server-<VERSION>-linux-arm64/bin
 输入以下命令设置进入 `code-server` 的临时密码：
 
 > 请注意替换尖括号及其内容为你设置的密码。
-
 ```bash
 export PASSWORD="<PASSWORD>"
 ```
@@ -107,13 +103,11 @@ export PASSWORD="<PASSWORD>"
 ```
 
 > 请注意替换尖括号及其内容为相应版本号。
-
 ```bash
 cd code-server-<VERSION>-linux-arm64/bin
 ```
 
 > 请注意替换尖括号及其内容为你设置的密码。
-
 ```bash
 export PASSWORD="<PASSWORD>"
 ```
