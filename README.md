@@ -20,13 +20,13 @@
 
 ### 初次配置
 
-在 F-Droid 中下载 termux 软件：[https://f-droid.org/zh_Hans/packages/com.termux/](https://f-droid.org/zh_Hans/packages/com.termux/)
+在 F-Droid 中下载 Termux 软件：[https://f-droid.org/zh_Hans/packages/com.termux/](https://f-droid.org/zh_Hans/packages/com.termux/)
 
 [![](https://gitlab.com/fdroid/artwork/-/raw/master/badge/get-it-on-zh-hans.png)](https://f-droid.org/zh_Hans/packages/com.termux/)
 
 在本仓库的发行版中下载 8080 软件，也可自行编译。
 
-下载完成后，打开 termux 软件，输入此命令以选择 termux 所在镜像：
+下载完成后，打开 Termux 软件，输入此命令以选择 termux 所在镜像：
 
 ```bash
 termux-change-repo
@@ -65,7 +65,7 @@ apt update && apt upgrade
 > 请注意替换尖括号及其内容为相应版本号，例如：`wget https://github.com/coder/code-server/releases/download/v4.15.0/code-server-4.15.0-linux-arm64.tar.gz`。
 
 ```bash
-wget https://github.com/cdr/code-server/releases/download/<VERSION>/code-server-<VERSION>-linux-arm64.tar.gz
+wget https://github.com/coder/code-server/releases/download/<VERSION>/code-server-<VERSION>-linux-arm64.tar.gz
 ```
 
 > 请注意替换尖括号及其内容为相应版本号，例如：`tar -xvf ./code-server-4.15.0-linux-arm64.tar.gz`。
@@ -74,7 +74,7 @@ wget https://github.com/cdr/code-server/releases/download/<VERSION>/code-server-
 tar -xvf ./code-server-<VERSION>-linux-arm64.tar.gz
 ```
 
-移动的解压后目录：
+移动到解压后目录：
 
 > 请注意替换尖括号及其内容为相应版本号，例如：`cd code-server-4.15.0-linux-arm64/bin`。
 
@@ -98,9 +98,9 @@ export PASSWORD="<PASSWORD>"
 
 打开从本仓库下载的 8080 软件，输入你设置的密码，即可进入 `code-server`。
 
-### 日后使用
+### 后续使用
 
-打开 termux，依次运行以下命令：
+打开 Termux，依次运行以下命令：
 
 ```bash
 ./start-ubuntu.sh
@@ -124,6 +124,6 @@ export PASSWORD="<PASSWORD>"
 
 然后打开 8080 软件即可。
 
-### 更多
+### 附加说明
 
-由于 termux 的文件保存在私有目录（data/data）中，非 root 设备无法进入，因此可以通过在 Ubuntu 环境下安装各种使用 SSH、Web 等方式的服务器管理工具进行文件管理。
+由于 Termux 的文件保存在私有目录（data/data）中，非 root 设备无法进入，因此可以通过在 Ubuntu 环境下安装各种使用 SSH、Web 等方式的服务器管理工具进行文件管理。

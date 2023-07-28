@@ -20,13 +20,13 @@ If you have any suggestions or feedback regarding this repository, please feel f
 
 ### Initial Configuration
 
-Download the `termux` app from F-Droid: [https://f-droid.org/packages/com.termux/](https://f-droid.org/packages/com.termux/)
+Download the `Termux` app from F-Droid: [https://f-droid.org/en/packages/com.termux/](https://f-droid.org/en/packages/com.termux/)
 
 [![](https://gitlab.com/fdroid/artwork/-/raw/master/badge/get-it-on-en-us.png)](https://f-droid.org/en/packages/com.termux/)
 
 In the Releases section of this repository, download the 8080 app, or you can compile it yourself.
 
-After the download is complete, open the `termux` app and enter the following command to select the mirror for `termux`:
+After the download is complete, open the `Termux` app and enter the following command to select the mirror for `Termux`:
 
 ```bash
 termux-change-repo
@@ -65,7 +65,7 @@ apt update && apt upgrade
 > Please note to replace the angle brackets and their contents with the corresponding version number, for example: `wget https://github.com/coder/code-server/releases/download/v4.15.0/code-server-4.15.0-linux-arm64.tar.gz`.
 
 ```bash
-wget https://github.com/cdr/code-server/releases/download/<VERSION>/code-server-<VERSION>-linux-arm64.tar.gz
+wget https://github.com/coder/code-server/releases/download/<VERSION>/code-server-<VERSION>-linux-arm64.tar.gz
 ```
 
 > Please note to replace the angle brackets and their contents with the corresponding version number, for example: `tar -xvf ./code-server-4.15.0-linux-arm64.tar.gz`.
@@ -100,7 +100,7 @@ Open the 8080 app that you downloaded from this repository and enter the passwor
 
 ### Subsequent Usage
 
-Open `termux` and execute the following commands:
+Open `Termux` and execute the following commands:
 
 ```bash
 ./start-ubuntu.sh
@@ -126,4 +126,4 @@ Then open the 8080 app.
 
 ### Additional Notes
 
-Since termux stores files in a private directory (data/data), non-root devices cannot access it. Therefore, you can install various server management tools in the Ubuntu environment, such as SSH or web-based tools, to manage files.
+Since `Termux` stores files in a private directory (data/data), non-root devices cannot access it. Therefore, you can install various server management tools in the Ubuntu environment, such as SSH or web-based tools, to manage files.
