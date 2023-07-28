@@ -19,6 +19,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.webkit.SslErrorHandler
+import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -42,6 +43,7 @@ class CustomWebView(context: Context) : WebView(context) {
 class MainActivity : AppCompatActivity() {
     private var originalPaddingBottom = 0
     private lateinit var myWebView: WebView
+    private lateinit var progressBar:View
 
     @SuppressLint("UseCompatLoadingForDrawables", "ResourceAsColor")
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -98,12 +100,12 @@ class MainActivity : AppCompatActivity() {
             val builder = MaterialAlertDialogBuilder(this)
             builder.setTitle("请求所有文件访问权限")
                 .setMessage("Android WebView 可能调用文件，是否给予所有文件访问权限？")
-                .setPositiveButton("前往权限设置") { dialog, which ->
+                .setPositiveButton("前往权限设置") { _, _ ->
                     var intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
                     intent.data = Uri.parse("package:" + this.packageName)
                     val rmes = 100
                     startActivityForResult(intent, rmes)
-                }.setNegativeButton("拒绝") { dialog, which -> }
+                }.setNegativeButton("拒绝") { _, _ -> }
             val dialog = builder.create()
             dialog.show()
 
@@ -127,6 +129,7 @@ class MainActivity : AppCompatActivity() {
 
         myWebView = findViewById(R.id.webview)
         var rootLayout: ViewGroup? = findViewById(R.id.rootLayout)
+        progressBar=findViewById(R.id.progressBar)
 
 
         //权限申请
@@ -218,13 +221,13 @@ class MainActivity : AppCompatActivity() {
         myWebView.setDownloadListener { url, _, _, _, _ ->
             val builder = MaterialAlertDialogBuilder(this)
             builder.setTitle("是否下载？").setMessage(url)
-                .setPositiveButton("下载") { dialog, which ->
+                .setPositiveButton("下载") { _, _ ->
                     //系统下载
                     val request = DownloadManager.Request(Uri.parse(url))
                     val downloadManager =
                         getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
                     downloadManager.enqueue(request)
-                }.setNegativeButton("拒绝") { dialog, which -> }
+                }.setNegativeButton("拒绝") { _, _ -> }
             val dialog = builder.create()
             dialog.show()
         }
@@ -279,7 +282,17 @@ class MainActivity : AppCompatActivity() {
             }
             WindowInsetsCompat.Builder(insets).build()
         }
-
+        myWebView.webChromeClient=object :WebChromeClient(){
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                super.onProgressChanged(view, newProgress)
+                if (newProgress==100){
+                    progressBar.visibility=View.GONE
+                    progressBar.bringToFront()
+                }else{
+                    progressBar.visibility=View.VISIBLE
+                }
+            }
+        }
 
         myWebView.loadUrl("http://127.0.0.1:8080")
 
