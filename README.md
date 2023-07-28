@@ -26,7 +26,7 @@
 
 在本仓库的发行版中下载 8080 软件，也可自行编译。
 
-下载完成后，打开 Termux 软件，输入此命令以选择 termux 所在镜像：
+下载完成后，打开 Termux 软件，输入此命令以选择 Termux 所在镜像：
 
 ```bash
 termux-change-repo
