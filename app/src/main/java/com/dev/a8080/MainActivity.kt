@@ -108,8 +108,7 @@ class MainActivity : AppCompatActivity() {
 
         @RequiresApi(Build.VERSION_CODES.R) if (!Environment.isExternalStorageManager()) {
             val builder = MaterialAlertDialogBuilder(
-                this,
-                com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
+                this
             )
             builder.setTitle("请求所有文件访问权限").setIcon(R.drawable.database_2_line)
                 .setMessage("Android WebView 可能调用文件，是否给予所有文件访问权限？")
@@ -233,8 +232,7 @@ class MainActivity : AppCompatActivity() {
 
         myWebView.setDownloadListener { url, _, _, _, _ ->
             val builder = MaterialAlertDialogBuilder(
-                this,
-                com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
+                this
             )
             builder.setTitle("下载文件？").setIcon(R.drawable.download_line).setMessage(url)
                 .setPositiveButton("下载") { _, _ ->
@@ -337,7 +335,8 @@ class MainActivity : AppCompatActivity() {
         myWebView.loadUrl("http://127.0.0.1:8080")
 
         //软键盘动画
-        ViewCompat.setWindowInsetsAnimationCallback(rootLayout,
+        ViewCompat.setWindowInsetsAnimationCallback(
+            rootLayout,
             object : WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_STOP) {
                 var startBottom = 0f
 
