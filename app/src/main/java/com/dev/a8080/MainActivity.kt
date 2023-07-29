@@ -2,6 +2,7 @@ package com.dev.a8080
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Application
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
@@ -31,6 +32,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsAnimationCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class CustomWebView(context: Context) : WebView(context) {
@@ -40,10 +42,17 @@ class CustomWebView(context: Context) : WebView(context) {
     }
 }
 
+class TipTimeApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        DynamicColors.applyToActivitiesIfAvailable(this)
+    }
+}
+
 class MainActivity : AppCompatActivity() {
     private var originalPaddingBottom = 0
     private lateinit var myWebView: WebView
-    private lateinit var progressBar:View
+    private lateinit var progressBar: View
 
     @SuppressLint("UseCompatLoadingForDrawables", "ResourceAsColor")
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -129,7 +138,7 @@ class MainActivity : AppCompatActivity() {
 
         myWebView = findViewById(R.id.webview)
         var rootLayout: ViewGroup? = findViewById(R.id.rootLayout)
-        progressBar=findViewById(R.id.progressBar)
+        progressBar = findViewById(R.id.progressBar)
 
 
         //权限申请
@@ -282,14 +291,14 @@ class MainActivity : AppCompatActivity() {
             }
             WindowInsetsCompat.Builder(insets).build()
         }
-        myWebView.webChromeClient=object :WebChromeClient(){
+        myWebView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
-                if (newProgress==100){
-                    progressBar.visibility=View.GONE
+                if (newProgress == 100) {
+                    progressBar.visibility = View.GONE
                     progressBar.bringToFront()
-                }else{
-                    progressBar.visibility=View.VISIBLE
+                } else {
+                    progressBar.visibility = View.VISIBLE
                 }
             }
         }
