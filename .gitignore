@@ -1,3 +1,9 @@
 
 .DS_Store
 *.properties
+.gradle/8.0/fileChanges/last-build.bin
+.gradle/8.0/dependencies-accessors/dependencies-accessors.lock
+.gradle/8.0/checksums/checksums.lock
+.gradle/8.0/fileHashes/fileHashes.lock
+.gradle/8.0/executionHistory/executionHistory.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
