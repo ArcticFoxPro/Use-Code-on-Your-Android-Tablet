@@ -27,6 +27,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -106,15 +107,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         @RequiresApi(Build.VERSION_CODES.R) if (!Environment.isExternalStorageManager()) {
-            val builder = MaterialAlertDialogBuilder(this)
-            builder.setTitle("请求所有文件访问权限")
+            val builder = MaterialAlertDialogBuilder(
+                this,
+                com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
+            )
+            builder.setTitle("请求所有文件访问权限").setIcon(R.drawable.database_2_line)
                 .setMessage("Android WebView 可能调用文件，是否给予所有文件访问权限？")
                 .setPositiveButton("前往权限设置") { _, _ ->
                     var intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
                     intent.data = Uri.parse("package:" + this.packageName)
                     val rmes = 100
                     startActivityForResult(intent, rmes)
-                }.setNegativeButton("拒绝") { _, _ -> }
+                }.setNeutralButton("拒绝") { _, _ -> }
             val dialog = builder.create()
             dialog.show()
 
@@ -228,15 +232,18 @@ class MainActivity : AppCompatActivity() {
         originalPaddingBottom = myWebView.paddingBottom
 
         myWebView.setDownloadListener { url, _, _, _, _ ->
-            val builder = MaterialAlertDialogBuilder(this)
-            builder.setTitle("是否下载？").setMessage(url)
+            val builder = MaterialAlertDialogBuilder(
+                this,
+                com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog_Centered
+            )
+            builder.setTitle("下载文件？").setIcon(R.drawable.download_line).setMessage(url)
                 .setPositiveButton("下载") { _, _ ->
                     //系统下载
                     val request = DownloadManager.Request(Uri.parse(url))
                     val downloadManager =
                         getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
                     downloadManager.enqueue(request)
-                }.setNegativeButton("拒绝") { _, _ -> }
+                }.setNeutralButton("拒绝") { _, _ -> }
             val dialog = builder.create()
             dialog.show()
         }
@@ -253,10 +260,34 @@ class MainActivity : AppCompatActivity() {
                 super.onPageStarted(view, url, favicon)
             }
 
+            @SuppressLint("QueryPermissionsNeeded")
+            @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(
-                view: WebView?, request: WebResourceRequest?
+                view: WebView, request: WebResourceRequest
             ): Boolean {
-                return super.shouldOverrideUrlLoading(view, request)
+                val url = request.url.toString()
+
+                val uri = Uri.parse(url)
+
+                //检测是否127.0.0.1
+                val host = uri.host
+                if (host != null && (host == "127.0.0.1" || host.endsWith(".127.0.0.1") || host == "localhost")) {
+                    view.loadUrl(url)
+                } else {
+                    val builder = MaterialAlertDialogBuilder(
+                        this@MainActivity,
+                        com.google.android.material.R.style.ThemeOverlay_Material3_MaterialAlertDialog
+                    )
+                    builder.setTitle("打开外链？").setMessage(url)
+                        .setIcon(R.drawable.share_circle_line).setPositiveButton("打开") { _, _ ->
+                            val customTabsIntent: CustomTabsIntent =
+                                CustomTabsIntent.Builder().build()
+                            customTabsIntent.launchUrl(this@MainActivity, Uri.parse(url))
+                        }.setNeutralButton("拒绝") { _, _ -> }
+                    val dialog = builder.create()
+                    dialog.show()
+                }
+                return true
             }
 
             @SuppressLint("WebViewClientOnReceivedSslError")
@@ -306,8 +337,7 @@ class MainActivity : AppCompatActivity() {
         myWebView.loadUrl("http://127.0.0.1:8080")
 
         //软键盘动画
-        ViewCompat.setWindowInsetsAnimationCallback(
-            rootLayout,
+        ViewCompat.setWindowInsetsAnimationCallback(rootLayout,
             object : WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_STOP) {
                 var startBottom = 0f
 
@@ -340,8 +370,6 @@ class MainActivity : AppCompatActivity() {
                     return insets
                 }
             })
-
-
     }
 
     @Deprecated("Deprecated in Java")
