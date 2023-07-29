@@ -121,3 +121,7 @@ export PASSWORD="<PASSWORD>"
 ### 附加说明
 
 由于 Termux 的文件保存在私有目录（data/data）中，非 root 设备无法进入，因此可以通过在 Ubuntu 环境下安装各种使用 SSH、Web 等方式的服务器管理工具进行文件管理。
+
+`code-server` 的永久密码存放在 Ubuntu 环境的 `~/.config/code-server/config.yaml` 的 `password` 中，更改 `password` 即可更改永久密码。
+
+`code-server` 的全部配置均存放在 `~/.local/share/code-server` 中而非 `code-server` 本身，因此，升级或更改 `code-server` 本身不会丢失配置。

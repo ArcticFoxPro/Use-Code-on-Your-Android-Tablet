@@ -121,3 +121,7 @@ Then open the 8080 app.
 ### Additional Notes
 
 Since `Termux` stores files in a private directory (data/data), non-root devices cannot access it. Therefore, you can install various server management tools in the Ubuntu environment, such as SSH or web-based tools, to manage files.
+
+The permanent password for `code-server` is stored in the `password` field of the `~/.config/code-server/config.yaml` file in the Ubuntu environment. To change the permanent password, you can modify the value of the `password` field.
+
+All configurations for `code-server` are stored in `~/.local/share/code-server` instead of within `code-server` itself. Therefore, upgrading or changing `code-server` itself will not result in configuration loss.
