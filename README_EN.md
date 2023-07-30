@@ -1,6 +1,6 @@
 > Translated from Chinese Simplified by ChatGPT 3.5.
 
-# Use VS Code on Your Android Tablet（[`code-server`](https://coder.com/docs/code-server/)）
+# Use Code on Your Android Tablet（[`code-server`](https://coder.com/docs/code-server/)）
 
 ![](/ReadmeImageEN.png)
 

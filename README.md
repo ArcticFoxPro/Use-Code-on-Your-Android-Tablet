@@ -1,4 +1,4 @@
-# 在 Android 平板上使用 VS Code（[`code-server`](https://coder.com/docs/code-server/)）
+# 在 Android 平板上使用 Code（[`code-server`](https://coder.com/docs/code-server/)）
 
 ![](/ReadmeImageZhCN.png)
 
