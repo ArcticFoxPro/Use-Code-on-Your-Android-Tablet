@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.webkit.SslErrorHandler
+import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
@@ -54,6 +55,16 @@ class MainActivity : AppCompatActivity() {
     private var originalPaddingBottom = 0
     private lateinit var myWebView: WebView
     private lateinit var progressBar: View
+    private var uploadMessage: ValueCallback<Array<Uri>>? = null
+
+    companion object {
+        private const val FILE_CHOOSER_REQUEST_CODE = 1
+        private const val REQUIRED_PERMISSIONS_REQUEST_CODE = 2
+
+        private val REQUIRED_PERMISSIONS = arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+    }
 
     @SuppressLint("UseCompatLoadingForDrawables", "ResourceAsColor")
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -330,6 +341,18 @@ class MainActivity : AppCompatActivity() {
                     progressBar.visibility = View.VISIBLE
                 }
             }
+
+
+            override fun onShowFileChooser(
+                webView: WebView?,
+                filePathCallback: ValueCallback<Array<Uri>>?,
+                fileChooserParams: FileChooserParams?
+            ): Boolean {
+                uploadMessage = filePathCallback!!
+                openFileChooser()
+                return true
+            }
+
         }
 
         myWebView.loadUrl("http://127.0.0.1:8080")
@@ -381,4 +404,77 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    // 打开文件选择器
+    private fun openFileChooser() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "*/*" // 可根据需要进行文件类型的限制
+        }
+        startActivityForResult(intent, FILE_CHOOSER_REQUEST_CODE)
+    }
+
+    // 处理文件选择结果
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == FILE_CHOOSER_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                data?.let { intentData ->
+                    uploadMessage?.onReceiveValue(
+                        WebChromeClient.FileChooserParams.parseResult(
+                            resultCode, intentData
+                        )
+                    )
+                }
+            } else {
+                uploadMessage?.onReceiveValue(null)
+            }
+            uploadMessage = null
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    // 检查是否具有所需权限
+    private fun hasRequiredPermissions(): Boolean {
+        for (permission in REQUIRED_PERMISSIONS) {
+            if (ContextCompat.checkSelfPermission(
+                    this, permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return false
+            }
+        }
+        return true
+    }
+
+    // 请求必要的权限
+    private fun requestRequiredPermissions() {
+        ActivityCompat.requestPermissions(
+            this, REQUIRED_PERMISSIONS, REQUIRED_PERMISSIONS_REQUEST_CODE
+        )
+    }
+
+    // 处理权限请求结果
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        if (requestCode == REQUIRED_PERMISSIONS_REQUEST_CODE) {
+            var allPermissionsGranted = true
+            grantResults.forEach { result ->
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    allPermissionsGranted = false
+                }
+            }
+            if (allPermissionsGranted) {
+                // 权限已授予
+                // 打开文件选择器
+                openFileChooser()
+            } else {
+                // 权限被拒绝
+                // 处理权限被拒绝的情况
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 }
+
+
