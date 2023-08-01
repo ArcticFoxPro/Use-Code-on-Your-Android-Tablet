@@ -34,6 +34,7 @@ termux-change-repo
 
 然后输入下列命令安装 OpenSSL 和 Ubuntu 环境
 
+> 这一步执行后可能出现“What would you like to do about it?”选项，看到后请输入“Y”并回车。
 ```bash
 pkg install wget openssl-tool proot -y
 ```
